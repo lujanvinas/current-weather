@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather App</title>
+</head>
+<body>
+  <div class="section">
+    <div id="video-container">
+      <video autoplay loop muted id="Snow" class="video">
+        <source src="video/snow.mp4">
+      </video>
+      <video autoplay loop muted id="Rain" class="video">
+        <source src="video/rain.mp4">
+      </video>
+      <video autoplay loop muted id="Clear" class="video">
+        <source src="video/clear.mp4">
+      </video>
+      <video autoplay loop muted id="Clouds" class="video">
+        <source src="video/cloudy.mp4">
+      </video>
+    </div>
+    <div class="container">
+      <div class="row" id="row-weather">
+          <div class="w-box weather">
+              <h1 id="w-location"></h1>
+              <h2 class="capitalize" id="w-desc"></h2>
+              <h3 id="w-string"></h3>
+              <img id="w-icon">
+              <ul id="w-details" class="list-group mt-3">
+                  <li id="w-feels-like"></li>
+                  <li id="w-humidity"></li>
+                  <li id="w-wind"></li>
+              </ul>
+              <button type="button" id="loc-modal" class="btn shadow-inset-center" data-bs-toggle="modal" data-bs-target="#locModal">
+                  Change Location
+                </button>
+          </div>
+        </div>
+        <div class="row" id="modal">
+          <div class="w-box w-modal">
+            <div class="modal-fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="locModalLabel">Choose Location</h5>
+                    <button id="x" type="button" class="close shadow-inset-center" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="w-form">
+                      <div class="form-group">
+                          <label for="city">City</label>
+                          <input type="text" id="city" class="form-control" placeholder="city" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="country">Country</label>
+                          <input type="text" id="country" class="form-control" placeholder="country" >
+                      </div>
+                    </form>
+                  </div>
+                    <button id="w-change-btn" type="button" class="btn shadow-inset-center">Check Weather</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script src="storage.js"></script>
+    <script src="weather.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+    
+</body>
+</html>
