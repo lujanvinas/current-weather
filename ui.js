@@ -11,7 +11,6 @@ class UI {
         this.wind = document.getElementById("w-wind");
     }
     
-  
     
     paint(weather) {
         const temp = Math.round(weather.weather.main.temp);
@@ -27,59 +26,60 @@ class UI {
         this.wind.textContent = `Wind: ${windSpeed} km/h`;
         
         const condition = weather.weather.weather[0].main;
-        const section = document.getElementsByClassName('section');
-        // const snow = document.getElementById("snow");
-        // const rain = document.getElementById("rain");
-        // const clouds = document.getElementById("clouds");
-        // const clear = document.getElementById("clear");
 
         // Check if condition matches id, and add/remove class accordingly
         let items = document.getElementById('video-container').children;
     
         items = Array.from(items);
-        // console.log(items[0].id);
 
         for(let i = 0; i < items.length; i++){
             if(items[i].id === condition) {
                 items[i].classList.add('active');
-                console.log(items[i].id)
             } else {
                 items[i].classList.remove('active');
             }
         }
+    }
 
-        // switch(condition) {
-        //     case 'Rain':
-        //         // rain.classList.add('active');
-        //         // clouds.classList.remove('active');
-        //         // snow.classList.remove('active');
-        //         // clear.classList.remove('active');
-        //         toggleClass();
-        //         break;
-        //     case 'Clouds':
-        //         // clouds.classList.add('active');
-        //         // rain.classList.remove('active');
-        //         // snow.classList.remove('active');
-        //         // clear.classList.remove('active');
-        //         toggleClass();
-        //         break;
-        //     case 'Clear':
-        //         // clear.classList.add('active');
-        //         // clouds.classList.remove('active');
-        //         // rain.classList.remove('active');
-        //         // snow.classList.remove('active');
-        //         toggleClass();
-        //         break;
-        //     case 'Snow':
-        //         // snow.classList.add('active');
-        //         // clouds.classList.remove('active');
-        //         // rain.classList.remove('active');
-        //         // clear.classList.remove('active');
-        //         toggleClass();
-        //         break;
-        //     default:
-        //         section.style.backgroundColor = 'white'; 
-        // }
-//     }
-// }
-    }}
+    // Show alert msg
+    showAlert(message, className) {  
+        const alert = document.getElementById('alert');       
+            alert.classList.add(className)
+            alert.innerHTML += message;
+
+
+            setTimeout((className) => {        
+                if(alert) {
+                    alert.classList.remove(className);
+                    alert.innerHTML = '';
+                }
+            }, 2000);       
+    }
+
+    // Clear input after submit
+    clearInput() {
+        document.getElementById('city').value = '';
+    }
+
+    // Show weather
+    // close search 
+    showWeather() {
+    const search = document.getElementById('search-container');
+    const weathCont = document.getElementById('weather-container');
+    search.style.display = 'none';
+    weathCont.style.display = 'block';
+    }
+
+    changeLocation() {
+    const search = document.getElementById('search-container');
+    const weathCont = document.getElementById('weather-container');
+    const close = document.getElementById('close');
+
+    search.style.display = 'block';
+    weathCont.style.display = 'none';
+    close.style.display = 'block';
+
+    }
+
+}
+

@@ -1,74 +1,47 @@
-// Init storage object
-const storage = new Storage();
-
-// Get stored location data
-const weatherLocation = storage.getLocationData();
 
 // Init weather object
-const weather = new Weather(weatherLocation.city, weatherLocation.country);
+const weather = new Weather(city);
 
 // Init ui object
 const ui = new UI();
 
-// getWeather on DOM load
-document.addEventListener("DOMContentLoaded", getWeather);
+// Search location
+const searchLocation = document.getElementById('w-change-btn');
 
-const modal = document.getElementById("modal");
-const container = document.getElementById("row-weather");
+// Search input event listener
+searchLocation.addEventListener('click', searchWeather)
 
+function searchWeather(e) {
+    // Get input text
+    const city = document.getElementById('city').value;
 
-// open modal 
-function openModal(e) {
-    container.style.display = "none";
-    modal.style.display = "block";
+    if(city !== '') {
+        // Make HTTP call
+        weather.getWeather(city)
+        .then(results => {
+            if(results.weather.message === 'city not found') {
+                // Show alert
+                ui.showAlert('City Not Found', 'alert');
+            } else {
+                // Show weather
+                console.log(results)
+                ui.paint(results) 
+                ui.clearInput();
+                ui.showWeather(); 
+            }
+        })
+    } else {
+        // Show Alert
+        ui.showAlert('You must enter a city', 'alert')
+    }
 }
 
-// close modal 
-function closeModal(e) {
-    container.style.display = "block";
-    modal.style.display = "none";
-}
-
-document.getElementById("loc-modal").addEventListener("click", openModal);
 
 
 // Change Location Event
-document.getElementById("w-change-btn").addEventListener("click", (e) => {
-    const city = document.getElementById("city").value;
-    const country = document.getElementById("country").value;
+document.getElementById('loc-modal').addEventListener('click', ui.changeLocation)
+
+// Close modal
+document.getElementById('close').addEventListener('click', ui.showWeather)
 
     
-    // change location
-    weather.changeLocation(city, country);
-    
-    // Set location in LS
-    storage.setLocationData(city, country);
-    
-    // call getWeather function again
-    getWeather();
-    
-    // Close modal - needs to be done in jQuery (but we actually dont need it)
-    // $("#locModal").modal("hide");
-
-
-    closeModal();
-
-    document.getElementById("x").addEventListener("click", closeModal)
-
-
-})
-
-
-
-
-function getWeather() {
-    // this will return a promise, bc of the async (we need to use the .then)
-    weather.getWeather()
-        .then(results => {
-            console.log(results)
-            // display results on ui
-            ui.paint(results) 
-        })
-        .catch(err => console.log(err));
-    }
-

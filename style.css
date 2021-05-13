@@ -11,6 +11,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
     --blue: #a7cdf3;
     --white: #ffffff;
     --pink: #bba0b2;
+    --red: rgb(168, 38, 38);
     --font1: 'Poppins', sans-serif;
 
 }
@@ -24,6 +25,7 @@ body{
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
+    padding: 0;
     color:black;
     font-size: 2.5rem;
     font-family: var(--font1);
@@ -77,9 +79,20 @@ video {
     width: 100%;
     margin: 50px auto;
     padding:0;
+    
+}
+
+#search-container {
+    display:block;
+    position: absolute;
     z-index: 1;
 }
 
+
+#weather-container {
+    display: none;
+    position: absolute;
+}
 
 .row {
     width: 50%;
@@ -90,12 +103,20 @@ video {
 
 }
 
+
 .w-box {
-    text-align: center;
     margin: 0 auto;
     line-height: 50px;
 }
 
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
 
 
 h1 {
@@ -178,7 +199,7 @@ h5 {
 
 #modal{
     position: relative;
-    display: none;
+    display: block;
     
 }
 
@@ -208,11 +229,12 @@ input:focus{
 
 input::placeholder{
     padding: 5px;
-    letter-spacing: 1px;;
+    letter-spacing: 1px;
     
 }
 
-.close {
+#close{
+    display: none;
     position: absolute;
     top: 25px;
     right: 22px;
@@ -223,6 +245,24 @@ input::placeholder{
 }
 
 
+.alert {
+    width: 70%;
+    padding-left: 15px;
+    margin: 0 auto;
+    background-color: var(--red);
+    color: white;
+    font-size: 1.5rem;
+    display: block;
+}
+
+.footer {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.5), rgba(255,255,255,0.5));
+    background-color: pink;
+    padding: 5px 0;
+
+}
 
 /* Media Queries */
 
@@ -295,6 +335,12 @@ input::placeholder{
         margin-top: 20px;
     }
 
+
+    input::placeholder{
+        font-size: 1rem;
+
+        
+    }
 }
 
 @media screen and (max-width: 400px) {
